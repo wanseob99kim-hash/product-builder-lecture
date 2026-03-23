@@ -12,14 +12,14 @@ class LottoBall extends HTMLElement {
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background-color: #fff;
+        background-color: var(--ball-bg, #fff);
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 1.5rem;
         font-weight: bold;
         box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        color: #333;
+        color: var(--ball-color, #333);
       }
     `;
     shadow.appendChild(style);
@@ -28,6 +28,20 @@ class LottoBall extends HTMLElement {
 }
 
 customElements.define('lotto-ball', LottoBall);
+
+// Theme toggle
+const themeToggle = document.getElementById('theme-toggle');
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  document.body.classList.add('dark');
+  themeToggle.textContent = '☀️ Light Mode';
+}
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  const isDark = document.body.classList.contains('dark');
+  themeToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
 
 const generatorBtn = document.getElementById('generator-btn');
 const lottoBallsContainer = document.getElementById('lotto-balls-container');

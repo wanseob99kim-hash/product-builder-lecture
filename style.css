@@ -1,20 +1,66 @@
 
+:root {
+    --bg-color: #f0f0f0;
+    --text-color: #333;
+    --header-bg: #fff;
+    --ball-bg: #fff;
+    --ball-color: #333;
+    --btn-bg: #4CAF50;
+    --btn-hover: #45a049;
+}
+
+body.dark {
+    --bg-color: #1a1a2e;
+    --text-color: #e0e0e0;
+    --header-bg: #16213e;
+    --ball-bg: #0f3460;
+    --ball-color: #e0e0e0;
+    --btn-bg: #e94560;
+    --btn-hover: #c73652;
+}
+
 body {
     font-family: sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     text-align: center;
+    transition: background-color 0.3s, color 0.3s;
     background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-header, main, footer {
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 2rem;
+    gap: 1rem;
+    background-color: var(--header-bg);
+    transition: background-color 0.3s;
+}
+
+main, footer {
+    padding: 2rem;
+}
+
+#theme-toggle {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    background-color: var(--btn-bg);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#theme-toggle:hover {
+    background-color: var(--btn-hover);
 }
 
 #generator-btn {
     padding: 1rem 2rem;
     font-size: 1.2rem;
-    background-color: #4CAF50;
+    background-color: var(--btn-bg);
     color: white;
     border: none;
     border-radius: 8px;
@@ -24,7 +70,7 @@ header, main, footer {
 }
 
 #generator-btn:hover {
-    background-color: #45a049;
+    background-color: var(--btn-hover);
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
@@ -40,12 +86,12 @@ header, main, footer {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #fff;
+    background-color: var(--ball-bg);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    color: #333;
+    color: var(--ball-color);
 }
