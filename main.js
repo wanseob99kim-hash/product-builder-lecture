@@ -1,29 +1,40 @@
 
 class LottoBall extends HTMLElement {
+  static get observedAttributes() {
+    return ['number'];
+  }
+
   constructor() {
     super();
-    const shadow = this.attachShadow({ mode: 'open' });
-    const ball = document.createElement('div');
-    ball.classList.add('lotto-ball');
-    ball.textContent = this.getAttribute('number');
-    const style = document.createElement('style');
-    style.textContent = `
-      .lotto-ball {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: var(--ball-bg, #fff);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.5rem;
-        font-weight: bold;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        color: var(--ball-color, #333);
-      }
+    this.attachShadow({ mode: 'open' });
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'number') {
+      this.render();
+    }
+  }
+
+  render() {
+    const number = this.getAttribute('number');
+    this.shadowRoot.innerHTML = `
+      <style>
+        .lotto-ball {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: var(--ball-bg, #fff);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.5rem;
+          font-weight: bold;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+          color: var(--ball-color, #333);
+        }
+      </style>
+      <div class="lotto-ball">${number}</div>
     `;
-    shadow.appendChild(style);
-    shadow.appendChild(ball);
   }
 }
 
